@@ -10,7 +10,7 @@ import json
 app = Flask(__name__)
 
 # Folder do przechowywania wczytanych zdjęć
-UPLOAD_FOLDER = 'uploads'
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 MODEL_URL = 'https://tfhub.dev/google/imagenet/mobilenet_v2_130_224/classification/4'
 model = tf.keras.Sequential([hub.KerasLayer(MODEL_URL, input_shape=(224, 224, 3))])
