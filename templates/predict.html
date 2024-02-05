@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wynik Predykcji</title>
+</head>
+<body>
+    <h1>Wynik Predykcji</h1>
+    <div>
+        <h2>Twój obraz:</h2>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Załadowany obraz" style="max-width: 500px;"/>
+    </div>
+    <div>
+        <h2>Przewidywany przedmiot:</h2>
+        <p>{{ predicted_label }}</p>
+    </div>
+</body>
+</html>
