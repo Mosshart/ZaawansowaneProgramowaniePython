@@ -40,13 +40,12 @@ def predict():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         f.save(file_path)
 
-        # Przygotuj obraz i wykonaj predykcję
+        # predykcja
         img = load_and_prepare_image(file_path)
         predictions = model.predict(img)
         predicted_class = np.argmax(predictions, axis=-1)
-        predicted_label = class_id_to_label(predicted_class[0] - 1)  # Zakładając, że masz funkcję class_id_to_label
+        predicted_label = class_id_to_label(predicted_class[0] - 1)
 
-        # Zwróć szablon HTML z przekazanym obrazkiem i etykietą
         return render_template('predict.html', filename=filename, predicted_label=predicted_label)
 
 
