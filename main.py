@@ -1,4 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
+
+from flask_swagger_ui import get_swaggerui_blueprint
 from werkzeug.utils import secure_filename
 import os
 import tensorflow as tf
@@ -9,6 +11,20 @@ import json
 
 app = Flask(__name__)
 
+SWAGGER_URL="/spec"
+API_URL="/static/predict.json"
+
+swagger_ui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': 'Rozpoznawanie przedmiotów'
+    }
+)
+app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
+
+
+
 # Folder do przechowywania wczytanych zdjęć
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -18,6 +34,8 @@ model.build([None, 224, 224, 3])
 
 with open('imagenet_class_index.json') as f:
     labels = json.load(f)
+
+
 def class_id_to_label(i):
     return labels[i]
 def load_and_prepare_image(image_path):
@@ -34,6 +52,9 @@ def upload_file():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    """
+    swagger_from_file: /predict.yaml
+    """
     if request.method == 'POST':
         f = request.files['file']
         filename = secure_filename(f.filename)

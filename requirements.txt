@@ -4,3 +4,4 @@ Pillow==10.2.0
 tensorflow==2.15.0
 tensorflow_hub==0.16.1
 Werkzeug==3.0.1
+flask_swagger_ui==4.11.1

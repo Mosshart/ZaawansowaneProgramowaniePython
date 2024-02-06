@@ -1,0 +1,64 @@
+{
+  "info": {
+    "description": "App to recognize objects on picture",
+    "version": "1.0.0",
+    "title": "Object recognition"
+  },
+  "tags": [
+    {
+      "name": "API"
+    }
+  ],
+  "swagger": "2.0",
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "API"
+        ],
+        "summary": "Upload image to recognize object",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "type": "file",
+            "description": "The image file to upload for dog breed recognition"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Prediction view"
+          }
+        }
+      }
+    },
+    "/uploads/{filename}": {
+        "get": {
+          "tags": [
+            "API"
+          ],
+          "summary": "Get uploaded file",
+          "parameters": [
+            {
+              "name": "filename",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The name of the uploaded file"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "File content"
+            },
+            "404": {
+              "description": "File not found"
+            }
+          }
+        }
+      }
+    }
+  }
